@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class DemoController {
-    @GetMapping
+    @GetMapping(value = "/hello")
     public String demo(){
-        return "Hello World";
+        System.out.println("1111");
+        return "Hello World, This is test jar project";
     }
 }
