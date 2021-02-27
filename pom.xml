@@ -39,6 +39,16 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <!--细粒度控制-->
+                <directory>script</directory>
+                <includes>
+                    <include>**/*.sh</include>
+                </includes>
+
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
