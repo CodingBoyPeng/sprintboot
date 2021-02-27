@@ -40,47 +40,43 @@
 
 
     <profiles>
+        <!-- 开发环境 -->
         <profile>
             <id>dev</id>
             <properties>
-                <spring.atcive>dev</spring.atcive>
+                <spring.profiles.active>dev</spring.profiles.active>
             </properties>
             <activation>
+                <!-- 默认使用dev -->
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
+        <!-- 生产环境 -->
         <profile>
-            <id>pro</id>
+            <id>prod</id>
             <properties>
-                <spring.atcive>pro</spring.atcive>
+                <spring.profiles.active>prod</spring.profiles.active>
             </properties>
         </profile>
     </profiles>
 
 
+
     <build>
         <resources>
             <resource>
-                <!--指定资源路径-->
-                <directory>${basedir}/profiles</directory>
-                <!--这个声明是否需要替换-->
-                <filtering>true</filtering>
-                <includes>
-                    <!--指定打包时候要包含的文件，这里的变量在打包时候会被替换-->
-                    <include>application-${spring.atcive}.properties</include>
-                </includes>
-                <targetPath>${basedir}/target/classes</targetPath>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>application*.properties</exclude>
+                </excludes>
             </resource>
             <resource>
-                <directory>${basedir}/src/main/resources</directory>
+                <directory>src/main/resources</directory>
+                <!-- 是否替换@xx@表示的maven properties属性值 -->
                 <filtering>true</filtering>
-                <excludes>
-                    <!--指定打包要排除的文件-->
-                    <exclude>application.yml</exclude>
-                </excludes>
                 <includes>
-                    <!--指定打包要包含的文件-->
-                    <include>bootstrap.yml</include>
+                    <include>application.properties</include>
+                    <include>application-${spring.profiles.active}.properties</include>
                 </includes>
             </resource>
 
