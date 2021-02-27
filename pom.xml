@@ -38,15 +38,58 @@
 
     </dependencies>
 
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <spring.atcive>dev</spring.atcive>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>pro</id>
+            <properties>
+                <spring.atcive>pro</spring.atcive>
+            </properties>
+        </profile>
+    </profiles>
+
+
     <build>
         <resources>
+            <resource>
+                <!--指定资源路径-->
+                <directory>${basedir}/profiles</directory>
+                <!--这个声明是否需要替换-->
+                <filtering>true</filtering>
+                <includes>
+                    <!--指定打包时候要包含的文件，这里的变量在打包时候会被替换-->
+                    <include>application-${spring.atcive}.properties</include>
+                </includes>
+                <targetPath>${basedir}/target/classes</targetPath>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <!--指定打包要排除的文件-->
+                    <exclude>application.yml</exclude>
+                </excludes>
+                <includes>
+                    <!--指定打包要包含的文件-->
+                    <include>bootstrap.yml</include>
+                </includes>
+            </resource>
+
             <resource>
                 <!--细粒度控制-->
                 <directory>script</directory>
                 <includes>
                     <include>**/*.sh</include>
                 </includes>
-
             </resource>
         </resources>
         <plugins>
@@ -67,5 +110,6 @@
         </plugins>
         <finalName>springboot</finalName>
     </build>
+
 
 </project>
