@@ -1,9 +1,4 @@
 #!/bin/bash
-# cd到你jar包所在目录
-
-cd /usr/local/java/work_space/
-chmod 777 deploy.sh
-BUILD_ID=dontiKillMe nohup deploy.sh &
 echo "stopping springboot application...."
 pid=`ps -ef | grep springboot.jar | grep -v grep | awk '{print $2}'`
 if ["$pid" == ""]
