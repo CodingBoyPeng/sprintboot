@@ -1,12 +1,12 @@
 #!/bin/bash
 echo "stopping springboot application...."
 pid=`ps -ef | grep springboot.jar | grep -v grep | awk '{print $2}'`
-if ["$pid" == ""]
+if ["$pid" == ""];
     then
         echo "springboot is already stop!"
-else
-    echo "kill -9 的pid:" + $pid
-    kill -9 $pid
+    else
+        echo "kill -9 的pid:" + $pid
+        kill -9 $pid
 fi
 
 echo "remove old springboot.jar ..."
