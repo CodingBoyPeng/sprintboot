@@ -1,0 +1,51 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${superServiceImplClassPackage};
+import java.util.List;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
+    @Autowired
+    private ${table.mapperName} ${table.mapperName.substring(0, 1).toLowerCase()}${table.mapperName.substring(1)};
+
+    @Override
+    public ${entity} selectById(Integer id) {
+        return  ${table.mapperName.substring(0, 1).toLowerCase()}${table.mapperName.substring(1)}.selectById(id);
+    }
+
+    @Override
+    public ${entity} deleteById(Integer id) {
+        return  ${table.mapperName.substring(0, 1).toLowerCase()}${table.mapperName.substring(1)}.deleteById(id);
+    }
+
+    @Override
+    public List<${entity}> batchSelect${entity}ByIds(List<String> ${entity}IdsStr) {
+        return  ${table.mapperName.substring(0, 1).toLowerCase()}${table.mapperName.substring(1)}.selectBatchIds(${entity}IdsStr);
+    }
+
+    /**
+     * <h4>功能:【批量删除${entity}信息】【创建人：${author}】</h4>
+     *
+     * @时间:${date}
+     * @备注:<h4></h4>
+     * @param ${entity}IdsStr 需要删除的数据ID
+     * @return 结果
+     */
+    @Override
+    public int batchDelete${entity}ByIds(List<String> ${entity}Ids) {
+        return  ${table.mapperName}.deleteBatchIds(${entity}Ids);
+    }
+}

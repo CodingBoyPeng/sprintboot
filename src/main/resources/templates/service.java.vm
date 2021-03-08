@@ -1,0 +1,54 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment} service接口层
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+        /**
+        * 根据Id删除
+        * @时间:${cfg.datetime}
+        * @param id 主键Id
+        */
+        int deleteById(Integer id);
+
+        /**
+        * 根据主键id进行查找
+        * @时间:${cfg.datetime}
+        * @param id 主键Id
+        */
+        ${entity} selectById(Integer id);
+
+        /**
+         * <h4>功能:【查询${entity}信息】【创建人：${author}】</h4>
+         *
+         * @时间:${cfg.datetime}
+         * @备注:<h4></h4>
+         * @param ids
+         * @return ${entity}信息
+         */
+        List<${entity}> batchSelect${entity}ByIds(List<String> ids);
+
+        /**
+         * <h4>功能:【批量删除${entity}信息】【创建人：${author}】</h4>
+         *
+         * @时间:${cfg.datetime}
+         * @备注:<h4></h4>
+         * @param ids id集合
+         * @return 结果
+         */
+        int batchDelete${entity}ByIds(List<String> ids);
+}
+#end

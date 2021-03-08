@@ -1,0 +1,107 @@
+package ${package.Controller};
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Arrays;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.pf.springboot.util.AjaxResult;
+import org.springframework.web.bind.annotation.ResponseBody;
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} Controller层
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+
+    @Autowired
+    private ${table.serviceName}    ${table.serviceName.substring(1, 2).toLowerCase()}${table.serviceName.substring(2)};
+
+    /**<h4>功能：【删除】【${${date}}】【创建人：${author}】</h4>
+     * <h4></h4>
+     *
+     */
+    @DeleteMapping(value = "/delete/{id}")
+    public AjaxResult delete${entity}ById(@PathVariable Integer id){
+        ${table.serviceName.substring(1, 2).toLowerCase()}${table.serviceName.substring(2)}.deleteById(id);
+        return AjaxResult.error("删除成功！");
+    }
+
+    /**<h4>功能：【批量删除】【${${date}}】【创建人：${author}】</h4>
+     * <h4></h4>
+     *
+     */
+    @DeleteMapping(value = "/batch/delete")
+    public AjaxResult batchDelete${entity}(@RequestParam(value = "ids") String ids){
+        if (StringUtils.isEmpty(ids)) {
+            return AjaxResult.error("删除失败！");
+        }
+
+        Integer num = ${table.serviceName.substring(1, 2).toLowerCase()}${table.serviceName.substring(2)}.batchDelete${entity}ByIds(Arrays.asList(ids.split(",")));
+        return AjaxResult.success("删除成功！删除了" + num + "条");
+    }
+
+
+
+    /**<h4>功能：【查找】【${cfg.datetime}】【创建人：${author}】</h4>
+     * <h4></h4>
+     *
+     */
+    @PostMapping(value = "/{id}")
+    @ResponseBody
+    public AjaxResult get${entity}(@PathVariable Integer id){
+        ${entity} ${entity} = ${table.serviceName.substring(1, 2).toLowerCase()}${table.serviceName.substring(2)}.selectById(id);
+        return AjaxResult.success(${entity});
+    }
+
+    /**<h4>功能：【批量】【${cfg.datetime}】【创建人：${author}】</h4>
+     * <h4></h4>
+     *
+     */
+    @PostMapping(value = "/list")
+    @ResponseBody
+    public AjaxResult get${entity}List(@RequestParam(value = "ids") String ids){
+        if (StringUtils.isEmpty(ids)) {
+            return AjaxResult.error("请输入Id");
+        }
+
+        List<${entity}> ${entity}Lists = ${table.serviceName.substring(1, 2).toLowerCase()}${table.serviceName.substring(2)}.batchSelect${entity}ByIds(Arrays.asList(ids.split(",")));
+        return AjaxResult.success(${entity}Lists);
+    }
+}
+
+#end
