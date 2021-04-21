@@ -1,5 +1,7 @@
 package com.pf.springboot.test;
 
+import org.springframework.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,16 +12,9 @@ import java.util.List;
  */
 public class Test01 {
     public static void main(String[] args) {
-        ArrayList<Integer> list = new ArrayList<Integer>() {{
-            this.add(1);
-            this.add(2);
-            this.add(3);
-            this.add(4);
-            this.add(5);
-            this.add(6);
+        List<Integer> list = new ArrayList<Integer>() {{
 
         }};
-        List<Integer> integers = list.subList(1, 5);
-        System.out.println(integers);
+
     }
 }

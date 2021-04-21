@@ -96,4 +96,15 @@ public class Company {
                 "创立时间: " + format.format(createTime) + "\n" +
                 "注册资金: " + registerMoney + "\n￣□￣｜｜";
     }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", bossName='" + bossName + '\'' +
+                ", size=" + size +
+                ", createTime=" + createTime +
+                ", registerMoney=" + registerMoney +
+                '}';
+    }
 }

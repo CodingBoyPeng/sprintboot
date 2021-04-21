@@ -47,4 +47,10 @@ public class UserController {
         List<String> userIds = Arrays.asList(ids.split(","));
         return AjaxResult.success(userService.getUserByIdList(userIds));
     }
+
+    @ResponseBody
+    @GetMapping("/batch/save")
+    public AjaxResult batchSaveUserList() {
+        return AjaxResult.success();
+    }
 }

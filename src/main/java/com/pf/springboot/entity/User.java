@@ -1,15 +1,20 @@
 package com.pf.springboot.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 /**
  * @description:
  * @author:Peng
  * @Date:2020/12/14
  */
 public class User {
+    @TableId(type = IdType.AUTO)
     private Long id;
-    private String name;
-    private Integer age;
-    private String email;
+    private String username;
+    private String nickname;
+    private String password;
+    private String createTime;
 
     public Long getId() {
         return id;
@@ -19,37 +24,35 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", email='" + email + '\'' +
-                '}';
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }
