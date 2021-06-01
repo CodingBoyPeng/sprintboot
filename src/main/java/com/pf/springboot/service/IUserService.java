@@ -12,5 +12,11 @@ import java.util.List;
 public interface IUserService {
     User getUserById(Integer userId);
 
-    List<User> getUserByIdList(List userIds);
+    List<User> getUserByIdList(List<String> userIds);
+
+    User randomFindUser();
+
+    static String echo(){
+        return "123123";
+    }
 }

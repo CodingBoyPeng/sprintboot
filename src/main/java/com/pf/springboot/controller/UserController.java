@@ -6,17 +6,15 @@ import com.pf.springboot.service.IUserService;
 import com.pf.springboot.util.AjaxResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.StringJoiner;
 
 /**
  * @description:
@@ -38,8 +36,8 @@ public class UserController {
 
     /**
      * mybatis-plus批量查询
-     * @param ids
-     * @return
+     * @param ids id数组
+     * @return user列表
      */
     @ResponseBody
     @GetMapping("/list")
@@ -52,5 +50,13 @@ public class UserController {
     @GetMapping("/batch/save")
     public AjaxResult batchSaveUserList() {
         return AjaxResult.success();
+    }
+
+
+    @GetMapping("/random")
+    @Transactional
+    @ResponseBody
+    public AjaxResult randomFindUser() {
+        return AjaxResult.success(userService.randomFindUser());
     }
 }

@@ -25,7 +25,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<User> getUserByIdList(List userIds) {
+    public List<User> getUserByIdList(List<String> userIds) {
         return userMapper.selectBatchIds(userIds);
+    }
+
+    @Override
+    public User randomFindUser() {
+        return userMapper.randomFindUser();
     }
 }
