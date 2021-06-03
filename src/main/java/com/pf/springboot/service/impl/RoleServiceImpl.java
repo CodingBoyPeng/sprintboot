@@ -29,14 +29,11 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     // 当前任务数
-    private CountDownLatch latch = new CountDownLatch(2);
+    private final CountDownLatch latch = new CountDownLatch(8);
 
     @Transactional
     @Override
     public Integer insertRoleByThreadPool() {
-        System.out.println("线程核心数：" + executor.getCorePoolSize());
-        System.out.println("最大线程数：" + executor.getMaxPoolSize());
-        System.out.println("线程存货时间：" + executor.getKeepAliveSeconds());
         List<Role> roles = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             Role role = new Role();
@@ -48,8 +45,10 @@ public class RoleServiceImpl implements IRoleService {
 
         long startTime = System.currentTimeMillis();
 //        roles.forEach(i->roleMapper.insert(i));
+        roleMapper.insert(roles.get(0));
         roles.forEach(i-> {
             executor.execute(() -> {
+                double a = 1/0;
                 System.out.println("当前线程"+ Thread.currentThread().getName());
                 roleMapper.insert(i);
                 latch.countDown();
