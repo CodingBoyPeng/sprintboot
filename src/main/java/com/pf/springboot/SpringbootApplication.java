@@ -17,7 +17,6 @@ public class SpringbootApplication {
 
     @Bean(value = "threadPool")
     public ThreadPoolTaskExecutor execute(){
-
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(2);
         executor.setMaxPoolSize(10);

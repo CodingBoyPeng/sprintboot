@@ -8,4 +8,6 @@ public interface IRoleService {
     List<Role> getAllRoles();
 
     Integer insertRoleByThreadPool();
+
+    String insertRole();
 }

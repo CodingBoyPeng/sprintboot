@@ -1,5 +1,6 @@
 package com.pf.springboot.service.impl;
 
+import com.pf.springboot.annotation.TargetDataSource;
 import com.pf.springboot.entity.Role;
 import com.pf.springboot.mapper.RoleMapper;
 import com.pf.springboot.service.IRoleService;
@@ -64,5 +65,17 @@ public class RoleServiceImpl implements IRoleService {
         System.out.println("多线程经历所需时间" + (endTime - startTime));
         return roles.size();
     }
+
+    @TargetDataSource
+    @Override
+    public String insertRole() {
+        Role role = new Role();
+        role.setRoleCode("code");
+        role.setRoleName("name");
+        role.setDesc("desc");
+        roleMapper.insert(role);
+        return "犯贱";
+    }
+
 
 }

@@ -27,4 +27,9 @@ public class RoleController {
     public AjaxResult insertRoleByThreadPool() {
         return AjaxResult.success(roleService.insertRoleByThreadPool());
     }
+
+    @GetMapping("test")
+    public AjaxResult insertRole() {
+        return AjaxResult.success(roleService.insertRole());
+    }
 }
