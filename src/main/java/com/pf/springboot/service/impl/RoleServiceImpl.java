@@ -1,7 +1,10 @@
 package com.pf.springboot.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pf.springboot.annotation.TargetDataSource;
 import com.pf.springboot.entity.Role;
+import com.pf.springboot.enums.DataSourceKey;
 import com.pf.springboot.mapper.RoleMapper;
 import com.pf.springboot.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +52,6 @@ public class RoleServiceImpl implements IRoleService {
         roleMapper.insert(roles.get(0));
         roles.forEach(i-> {
             executor.execute(() -> {
-                double a = 1/0;
                 System.out.println("当前线程"+ Thread.currentThread().getName());
                 roleMapper.insert(i);
                 latch.countDown();
@@ -66,7 +68,7 @@ public class RoleServiceImpl implements IRoleService {
         return roles.size();
     }
 
-    @TargetDataSource
+    @TargetDataSource(dataSourceKey=DataSourceKey.DB_SLAVE)
     @Override
     public String insertRole() {
         Role role = new Role();
@@ -74,7 +76,15 @@ public class RoleServiceImpl implements IRoleService {
         role.setRoleName("name");
         role.setDesc("desc");
         roleMapper.insert(role);
+
         return "犯贱";
+    }
+
+    @TargetDataSource(dataSourceKey=DataSourceKey.DB_SLAVE)
+    @Override
+    public IPage<Role> rolePage() {
+        Page<Role> userPage = new Page<>(1 , 10);
+        return roleMapper.selectPage(userPage, null);
     }
 
 

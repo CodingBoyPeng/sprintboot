@@ -1,12 +1,12 @@
 package com.pf.springboot.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.pf.springboot.aspect.DynamicRoutingDataSource;
 import com.pf.springboot.enums.DataSourceKey;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ import java.util.Map;
  * @Description:
  * @Date: Created in 19:31 2021/6/15
  */
-@MapperScan(basePackages = "com.apedad.example.dao")
+//@MapperScan(basePackages = "com.pf.springboot.mapper")
 @Configuration
 public class DynamicDataSourceConfiguration {
     @Bean
@@ -61,6 +61,8 @@ public class DynamicDataSourceConfiguration {
         MybatisSqlSessionFactoryBean sqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
 //        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dynamicDataSource());
+        // 这里不配置，分页插件会失效
+        sqlSessionFactoryBean.setPlugins(new PaginationInterceptor[]{new PaginationInterceptor()});
         //此处设置为了解决找不到mapper文件的问题
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
         return sqlSessionFactoryBean.getObject();

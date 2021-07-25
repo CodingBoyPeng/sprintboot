@@ -37,10 +37,10 @@ public class DynamicDataSourceAspect {
     public void doBefore(JoinPoint joinPoint, TargetDataSource targetDataSource) {
         DataSourceKey dataSourceKey = targetDataSource.dataSourceKey();
         if (dataSourceKey == DataSourceKey.DB_SLAVE) {
-            System.out.println(String.format("设置数据源为  " + DataSourceKey.DB_SLAVE));
+            System.out.println("设置数据源为  " + DataSourceKey.DB_SLAVE);
             DynamicDataSourceContextHolder.set(DataSourceKey.DB_SLAVE);
         } else {
-            System.out.println(String.format("使用默认数据源  " + DataSourceKey.DB_MASTER));
+            System.out.println("使用默认数据源  " + DataSourceKey.DB_MASTER);
             DynamicDataSourceContextHolder.set(DataSourceKey.DB_MASTER);
         }
     }
@@ -53,7 +53,7 @@ public class DynamicDataSourceAspect {
      */
     @After("@annotation(targetDataSource)")
     public void doAfter(JoinPoint joinPoint, TargetDataSource targetDataSource) {
-        System.out.println(String.format("当前数据源 ", targetDataSource.dataSourceKey(), "执行清理方法"));
+        System.out.printf("当前数据源 %n", targetDataSource.dataSourceKey(), "执行清理方法");
         DynamicDataSourceContextHolder.clear();
     }
 
