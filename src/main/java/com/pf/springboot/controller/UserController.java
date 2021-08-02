@@ -59,4 +59,6 @@ public class UserController {
     public AjaxResult randomFindUser() {
         return AjaxResult.success(userService.randomFindUser());
     }
+
+
 }
