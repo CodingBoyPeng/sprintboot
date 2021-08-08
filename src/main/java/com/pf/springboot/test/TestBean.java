@@ -29,7 +29,7 @@ public class TestBean implements BeanNameAware {
     }
     public TestBean() {
         this.beanName = "123";
-        System.out.println("TestBean方法无参构造调用了");
+//        System.out.println("TestBean方法无参构造调用了");
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.pf.springboot.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @Date: Created in 18:10 2021/7/25
  */
 @Configuration
-@MapperScan("com.pf.springboot.*.mapper*")
 public class MybatisPlusConfig {
 
     // 旧版
