@@ -154,6 +154,7 @@ public class UCloudFileUtils {
                     return null;
             }
 
+            
             return partStates;
         } catch (IOException e) {
             e.printStackTrace();
